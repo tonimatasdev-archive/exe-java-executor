@@ -11,8 +11,8 @@ int main(void) {
 
     const char command[] = "java -jar neutron-1.0.0.jar";
 
-    if (!CreateProcess(NULL,command, NULL, NULL, FALSE, CREATE_NO_WINDOW, NULL, NULL, &startupInfo, &processInformation)) {
-        printf("CreateProcess falló (%lu).\n", GetLastError());
+    if (!CreateProcess(NULL, command, NULL, NULL, FALSE, CREATE_NO_WINDOW, NULL, NULL, &startupInfo, &processInformation)) {
+        printf("CreateProcess error (%lu).\n", GetLastError());
         return 1;
     }
 
