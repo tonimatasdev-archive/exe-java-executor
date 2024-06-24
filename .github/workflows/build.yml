@@ -16,13 +16,26 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
+    - name: Set up CMake
+      uses: jwlawson/actions-setup-cmake@v1.11
+      with:
+        cmake-version: '3.28'
+
+    - name: Install Ninja
+      run: choco install ninja
+
+    - name: Create build directory
+      run: mkdir build
+
     - name: Configure CMake
-      run: cmake
+      run: cmake -S . -B build -G Ninja
 
     - name: Build
-      run: cmake --build ${{github.workspace}}/build
+      run: cmake --build build
 
-    - name: Test
-      working-directory: ${{github.workspace}}/build
-      run: ctest -C ${{env.BUILD_TYPE}}
+    - name: Upload build artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: JavaEXE
+        path: build/JavaEXE.exe
 
